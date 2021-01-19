@@ -13,11 +13,8 @@
     <!-- babel => compilation du JSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <style>
-        .Cookie {
-            width: 200px;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/app.css">
 </head>
 
 <body>
@@ -37,18 +34,25 @@
           this.incrementCounter = this.incrementCounter.bind(this);
           this.updateCookiesCounter = this.updateCookiesCounter.bind(this);
           this.recruitMother = this.recruitMother.bind(this);
+          this.recruitSanta = this.recruitSanta.bind(this)
 
           this.interval = setInterval(this.updateCookiesCounter, 1000);
       }
 
       render() {
           return (
-              <div>
-                  <h2>Compteur : {this.state.counter}</h2>
-                  <h3>Cookies par seconde : {this.state.cookiesPerSecond}</h3>
-                  <button onClick={this.incrementCounter}>Augmenter</button>
-                  <button onClick={this.recruitMother}>Recruter notre grand mère</button>
-                  <img className="Cookie" onClick={this.incrementCounter} src={"https://fr.rc-cdn.community.thermomix.com/recipeimage/0qmmaj2i-fe6fb-125607-cfcd2-jykg7uj2/838e7b54-b5e2-4b13-b4d5-bd8445780bf2/large/veritables-cookies-americains.jpg"}/>
+              <div className="container">
+                <div class="row mt-5">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <h2>Compteur : {this.state.counter}</h2>
+                        <h3>Cookies par seconde : {this.state.cookiesPerSecond}</h3>
+                        <button className="btn btn-primary me-2" onClick={this.incrementCounter}>Augmenter</button>
+                        <button className="btn btn-dark me-2" onClick={this.recruitMother}>Recruter notre grand mère</button>
+                        <button className="btn btn-dark" onClick={this.recruitSanta}>Recruter le père noel</button>
+                        <img className="Cookie" onClick={this.incrementCounter} src={"https://fr.rc-cdn.community.thermomix.com/recipeimage/0qmmaj2i-fe6fb-125607-cfcd2-jykg7uj2/838e7b54-b5e2-4b13-b4d5-bd8445780bf2/large/veritables-cookies-americains.jpg"}/>
+                    </div>
+                </div>
               </div>
           )
       }
@@ -63,13 +67,23 @@
       }
 
       /**
-       * Augmenter le débit des cookies
+       * Augmenter le débit des cookies de 1
        */
       recruitMother() {
           this.setState({
               cookiesPerSecond: this.state.cookiesPerSecond + 1,
           })
       }
+
+      /**
+       * Augmenter le débit des cookies de 5
+       */
+       recruitSanta() {
+           this.setState({
+               cookiesPerSecond: this.state.cookiesPerSecond +5,
+           })
+       }
+
 
       /**
        * Augmenter de 1 la valeur du state de counter
@@ -87,6 +101,7 @@
     document.getElementById('root')
   );
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 </body>
 
 </html>
