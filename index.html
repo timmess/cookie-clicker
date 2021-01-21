@@ -22,6 +22,23 @@
 <script type="text/babel">
 
   // Création de composant en créant des classes
+  
+  class GlobalIncomeRiseButton extends React.Component{
+    constructor(props){
+        super(props);
+    }
+
+    render() {
+        return(
+            <div>
+                <span>Augmenter le revenu global</span>
+                <br/>
+                <button className="btn btn-success" onClick={this.props.click}>Augmenter</button>
+            </div>
+        )
+    }
+  }
+
   class App extends React.Component {
 
     constructor() {
@@ -29,24 +46,34 @@
         this.state = {
             counter: 0,
             cookiesPerSecond: 0,
-            clicks: 99,
+            clicks: 0,
             mothers: 0,
             cooks: 0,
             successes:
                     [
                         {
+                            name: "10 clicks",
+                            clicks: 10,
+                            message: "Bravo, vous avez clické 10 fois",
+                            complete: false,
+                            isDisplayed : false,
+                        },
+                        {
                             name: "100 clicks",
                             clicks: 100,
                             message: "Bravo, vous avez clické 100 fois",
                             complete: false,
+                            isDisplayed : false,
                         },
                         {
                             name: "1000 clicks",
                             clicks: 1000,
                             message: "Bravo, vous avez clické 1000 fois",
                             complete: false,
+                            isDisplayed : false,
                         },
-                    ]
+                    ],
+            interval: 1000,
         }
 
         this.incrementCounter = this.incrementCounter.bind(this);
@@ -56,26 +83,30 @@
         this.setComplete = this.setComplete.bind(this);
         this.updateCookieCounterBySuccess = this.updateCookieCounterBySuccess.bind(this);
         this.componentDidUpdate = this.componentDidUpdate.bind(this);
+        this.lowerInterval = this.lowerInterval.bind(this);
+        this.test = this.test.bind(this);
 
-        this.interval = setInterval(this.updateCookiesCounter, 1000);
+        this.interval = setInterval(this.updateCookiesCounter, this.state.interval);
     }
 
     render() {
         return (
-        <div>
+        <div className="appMargin">
             <div className="container align-self-center">
                 <div className="row">
+                    
                     <div className="col-3 colorNougat rounded">
                         <div className="m-2">
-                            <h4>Succès à débloquer : </h4>
+                            <h4 className="text-center">Succès à débloquer : </h4>
                             <ul>
-                                <li>Cliquer 100 fois{this.state.clicks >= 100 ? " : Complété !" : ""}</li>    
-                                <li>Cliquer 1000 fois{this.state.clicks >= 1000 ? " : Complété !" : ""}</li>  
+                                {this.state.successes.map((success, index) =>
+                                    <li key={index}>{success.name} {success.complete === true ? " : Complété !" : ""}</li>
+                                )}
                             </ul>      
                         </div>
                     </div>
 
-                    <div className="col-6 text-center rounded">
+                    <div className="col-6 text-center rounded padding50">
 
                         <h1 className="mb-5">Cookie clicker</h1>
 
@@ -85,89 +116,123 @@
 
                         <h2>Nombre de clicks : {this.state.clicks}</h2>
 
-                        <img className="Cookie" onClick={this.incrementCounter} src={"https://fr.rc-cdn.community.thermomix.com/recipeimage/0qmmaj2i-fe6fb-125607-cfcd2-jykg7uj2/838e7b54-b5e2-4b13-b4d5-bd8445780bf2/large/veritables-cookies-americains.jpg"}/>
+                        <img className="Cookie" onClick={this.incrementCounter} src={"./img/cookie.jpg"}/>
                     </div>
                     
                     <div className="col-3 colorNougat rounded">
                         <div className="m-2">
                             <ul>
-                                {this.state.mothers >= 1 && <li className="my-3">Nombre de grand-mères : {this.state.mothers}</li>}
-                                {this.state.successes[0, 1].complete === true &&
+                                <h3 className="text-center">Vos clickers :</h3>
+                                {this.state.counter === 0 && 
                                     <div>
-                                        <p>Augmenter le revenu global</p>
-                                        <button className="btn btn-success" onClick={this.updateCookieCounterBySuccess}>Augmenter</button>
+                                        <h2 className="text-center mt-5">Cliquez sur le cookie !!!</h2>
+                                        <h2 className="text-center mt-5">Vite !!!</h2>
                                     </div>
                                 }
-                                {this.state.cooks >= 1 && <li className="my-3">Nombre de cuisiniers : {this.state.cooks}</li>}
+                                
+                                {this.state.mothers >= 1 && 
+                                    //A factoriser et mettre dans un map
+                                    <li className="my-3">
+                                        Grand-mères : {this.state.mothers} (+{this.state.mothers} cookies / s)
+                                    </li>
+                                }
+                                {this.state.cooks >= 1 && 
+                                    <li className="my-3">
+                                        Cuisiniers : {this.state.cooks} (+{this.state.cooks * 5} cookies / s)
+                                    </li>
+                                }
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="container mt-2">
-                {this.state.clicks === 100 &&
+            {this.state.successes.map((success, index) => success.clicks === this.state.clicks &&
+                    <div key={index} className="container mt-2">
                         <div className="col-12 text-center">
-                            <div className="alert alert-success">
-                                {this.state.successes[0].message}
+                            <div className="alert alert-success mb-0">
+                                {success.message}
                             </div>
                         </div> 
-                }
-                {this.state.clicks === 1000 &&
-                        <div className="col-12 text-center">
-                            <div className="alert alert-success">
-                                {this.state.successes[1].message}
+                    </div>
+            )}
+
+            <div className="container">
+                <div className="row">
+                    <div className="col-4 text-center mt-3 colorNougat">
+                        
+                        <h3>Travailleurs :</h3>
+                        {this.state.counter >= 10 &&
+                            <div className="mt-3">
+                                <button className="btn btn-dark" onClick={this.recruitMother}>Recruter une grand mère</button>
+                                <p>(+1 cookie par seconde)</p>
                             </div>
-                        </div>  
-                }  
-            </div>
+                        }
 
-            <div className="container met-2">
-                {this.state.counter >= 10 &&
-                    <div className="mt-3 text-center">
-                        <button className="btn btn-dark" onClick={this.recruitMother}>Recruter une grand mère</button>
-                        <p>(+1 cookie par seconde)</p>
-                    </div>
-                }
-
-                {this.state.counter >= 500 &&
-                    <div className="mt-3 text-center">
-                        <button className="btn btn-dark" onClick={this.recruitCook}>Recruter un cuisinier</button>
-                        <p>(+5 cookie par seconde)</p>
-                    </div>
-                }      
+                        {this.state.counter >= 500 &&
+                            <div className="mt-3">
+                                <button className="btn btn-dark" onClick={this.recruitCook}>Recruter un cuisinier</button>
+                                <p>(+5 cookie par seconde)</p>
+                            </div>
+                        }    
+                    </div>    
+                    <div className="col-4"></div>
+                    <div className="col-4 text-center mt-3 colorNougat">
+                        <h3>Améliorations :</h3>
+                        {this.state.successes[0].complete === true &&
+                            <div>
+                                <GlobalIncomeRiseButton click={this.updateCookieCounterBySuccess}/>    
+                            </div>
+                        }
+                    </div>   
+                </div>  
+                
             </div>
-            <div className="col-12 text-center"><button onClick={() => console.log(this.state.successes)}>successes</button></div>
         </div>
         )
     }
 
-    componentDidUpdate() {
-        // if(this.state.clicks === this.state.successes[0].clicks){
-        //     this.setComplete(0)
-        // }
-        
-        // console.log(this.state.successes[0].clicks)
+    test(){
+        console.log(this.state.successes)
     }
 
-    checkClicks(index) {
-        // condition qui permet de verifier si les clicks effectifs (clicks) sont égaux ou supérieurs aux cliks demandés dans le succès (success.clicks)
-        if(this.state.clicks === this.state.success.click){
-            setComplete(index)
+    componentDidUpdate(previousProps, previousState) {
+        // Met à jour le state "complete" des success à true si les clicks du container ont atteint les clicks du success
+        for (let i = 0; i < this.state.successes.length; i++) {
+            if(this.state.clicks === this.state.successes[i].clicks && previousState.successes[i].complete == false){
+                this.setComplete(i)
+            }
         }
     }
 
     /**
-     * Met à jour le state complete d'un succès à son inverse (bool)    
+     * Met à jour les states complete et isDisplayed d'un succès à son inverse (bool)    
      */
     setComplete(index) {
-        // Créer une copie du tableau
+        
         const newSuccesses = this.state.successes;
 
         newSuccesses[index].complete = !newSuccesses[index].complete
+        newSuccesses[index].isDisplayed = !newSuccesses[index].isDisplayed
         
         this.setState({
             successes: newSuccesses
+        })
+    }
+
+    /**
+     *  Met à jour l'intervale en la diminuant de 10 ms
+     */
+    lowerInterval() {
+        this.interval = setInterval(this.updateCookiesCounter, this.state.interval - 10);
+    }
+    
+    /**
+     * Mettre à jour le nombre cookies en lui ajoutant le cookiesPerSecond
+     */
+    updateCookiesCounter() {
+        this.setState({
+            counter: this.state.counter + this.state.cookiesPerSecond
         })
     }
 
@@ -176,17 +241,7 @@
      */
     updateCookieCounterBySuccess() {
         this.setState({
-            cookiesPerSecond: this.state.cookiesPerSecond * 1.5
-        })
-    }
-    
-
-    /**
-     * Mettre à jour le nombre cookies en lui ajoutant le cookiesPerSecond
-     */
-    updateCookiesCounter() {
-        this.setState({
-            counter: this.state.counter + this.state.cookiesPerSecond
+            cookiesPerSecond: this.state.cookiesPerSecond * 2
         })
     }
 

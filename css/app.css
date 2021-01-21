@@ -1,7 +1,19 @@
 .Cookie {
-    width: 200px;
+    width: 100px;
 }
 
 .colorNougat{
     background-color: rgb(204, 142, 105);
+}
+
+.padding50{
+    padding: 50px;
+}
+
+.appMargin{
+    margin-top: 100px;
+}
+
+.backgroundBlack{
+    background-color: black;
 }
