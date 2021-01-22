@@ -31,9 +31,7 @@
     render() {
         return(
             <div>
-                <span>Augmenter le revenu global</span>
-                <br/>
-                <button className="btn btn-success" onClick={this.props.click}>Augmenter</button>
+                <button className="btn btn-success" disabled={this.props.disabled} onClick={this.props.click}>Augmenter</button>
             </div>
         )
     }
@@ -45,10 +43,13 @@
         super();
         this.state = {
             counter: 0,
+            bigCookies: 0,
             cookiesPerSecond: 0,
             clicks: 0,
             mothers: 0,
             cooks: 0,
+            interval: 1000,
+            message: "",
             successes:
                     [
                         {
@@ -57,6 +58,7 @@
                             message: "Bravo, vous avez clické 10 fois",
                             complete: false,
                             isDisplayed : false,
+                            isClicked: false,
                         },
                         {
                             name: "100 clicks",
@@ -64,6 +66,7 @@
                             message: "Bravo, vous avez clické 100 fois",
                             complete: false,
                             isDisplayed : false,
+                            isClicked: false,
                         },
                         {
                             name: "1000 clicks",
@@ -71,9 +74,9 @@
                             message: "Bravo, vous avez clické 1000 fois",
                             complete: false,
                             isDisplayed : false,
+                            isClicked: false,
                         },
                     ],
-            interval: 1000,
         }
 
         this.incrementCounter = this.incrementCounter.bind(this);
@@ -85,6 +88,7 @@
         this.componentDidUpdate = this.componentDidUpdate.bind(this);
         this.lowerInterval = this.lowerInterval.bind(this);
         this.test = this.test.bind(this);
+        this.setClicked = this.setClicked.bind(this);
 
         this.interval = setInterval(this.updateCookiesCounter, this.state.interval);
     }
@@ -107,16 +111,19 @@
                     </div>
 
                     <div className="col-6 text-center rounded padding50">
-
+                        
                         <h1 className="mb-5">Cookie clicker</h1>
 
                         <h2>Cookies : {this.state.counter}</h2>
+
+                        <h2>Gros cookies : {this.state.bigCookies}</h2>
 
                         <h3>Cookies par seconde : {this.state.cookiesPerSecond}</h3>
 
                         <h2>Nombre de clicks : {this.state.clicks}</h2>
 
                         <img className="Cookie" onClick={this.incrementCounter} src={"./img/cookie.jpg"}/>
+                        {this.state.message && <div className="alert">{this.state.message}</div>}
                     </div>
                     
                     <div className="col-3 colorNougat rounded">
@@ -131,7 +138,7 @@
                                 }
                                 
                                 {this.state.mothers >= 1 && 
-                                    //A factoriser et mettre dans un map
+                                    //A factoriser et mettre dans un .map
                                     <li className="my-3">
                                         Grand-mères : {this.state.mothers} (+{this.state.mothers} cookies / s)
                                     </li>
@@ -146,16 +153,6 @@
                     </div>
                 </div>
             </div>
-
-            {this.state.successes.map((success, index) => success.clicks === this.state.clicks &&
-                    <div key={index} className="container mt-2">
-                        <div className="col-12 text-center">
-                            <div className="alert alert-success mb-0">
-                                {success.message}
-                            </div>
-                        </div> 
-                    </div>
-            )}
 
             <div className="container">
                 <div className="row">
@@ -175,18 +172,40 @@
                                 <p>(+5 cookie par seconde)</p>
                             </div>
                         }    
-                    </div>    
-                    <div className="col-4"></div>
+                    </div>   
+
+                    <div className="col-4 padding30">
+                        {this.state.successes.map((success, index) => success.clicks === this.state.clicks &&
+                            <div key={index} className="container mt-2">
+                                <div className="col-12 text-center">
+                                    <div className="alert alert-success mb-0">
+                                        {success.message}
+                                    </div>
+                                </div> 
+                            </div>
+                        )}       
+                    </div>
+
                     <div className="col-4 text-center mt-3 colorNougat">
                         <h3>Améliorations :</h3>
-                        {this.state.successes[0].complete === true &&
+                        {this.state.mothers >= 10 ?
                             <div>
-                                <GlobalIncomeRiseButton click={this.updateCookieCounterBySuccess}/>    
+                                <span>Augmenter le revenu global de 100% !!</span>
+                                {this.state.successes.map((success, index) => 
+                                    <div>
+                                        {success.name} <GlobalIncomeRiseButton key={index} disabled={success.isClicked === true} click={() => this.updateCookieCounterBySuccessSetClicked()}/>  
+                                    </div>
+                                )}
                             </div>
+                            :
+                            <div>
+                                <p>Jouez pour accéder aux amélioration ! ;)</p>
+                            </div>
+                            
                         }
                     </div>   
                 </div>  
-                
+                <button onClick={this.test}>test</button>
             </div>
         </div>
         )
@@ -196,6 +215,8 @@
         console.log(this.state.successes)
     }
 
+    
+    
     componentDidUpdate(previousProps, previousState) {
         // Met à jour le state "complete" des success à true si les clicks du container ont atteint les clicks du success
         for (let i = 0; i < this.state.successes.length; i++) {
@@ -203,6 +224,26 @@
                 this.setComplete(i)
             }
         }
+    }
+
+    updateCookieCounterBySuccessSetClicked() {
+        this.updateCookieCounterBySuccess()
+        this.setClicked()
+    }
+    
+    setClicked(){
+        const newSuccesses = this.state.successes;
+
+        for (let i = 0; i < this.state.successes.length; i++) 
+        {
+            if(this.state.clicks >= this.state.successes[i].clicks){
+                newSuccesses[i].isClicked = !newSuccesses[i].isClicked
+            }
+        }
+
+        this.setState({
+            successes: newSuccesses
+        })
     }
 
     /**
@@ -241,7 +282,7 @@
      */
     updateCookieCounterBySuccess() {
         this.setState({
-            cookiesPerSecond: this.state.cookiesPerSecond * 2
+            cookiesPerSecond: this.state.cookiesPerSecond * 2,
         })
     }
 
@@ -265,15 +306,24 @@
         })
     }
 
-
     /**
      * Augmenter de 1 la valeur du state de counter
      */
     incrementCounter() {
-          this.setState({
-              counter: this.state.counter + 1,
-              clicks: this.state.clicks +1,
-          })
+        this.setState({
+            counter: this.state.counter + 1,
+            clicks: this.state.clicks +1,
+        })
+
+        const a = Math.floor((Math.random() * 20) + 1);
+        const b = Math.floor((Math.random() * 20) + 1);
+
+        if (a === b) {
+            this.setState({
+                counter: this.state.counter + 9,
+                bigCookies: this.state.bigCookies +1
+            })
+        }
       }
   }
 
