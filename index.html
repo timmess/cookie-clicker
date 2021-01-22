@@ -42,11 +42,11 @@
     constructor() {
         super();
         this.state = {
-            counter: 50,
+            counter: 0,
             bigCookies: 0,
             cookiesPerSecond: 0,
             clicks: 0,
-            mothers: 99,
+            mothers: 0,
             cooks: 0,
             interval: 1000,
             message: "",
@@ -61,7 +61,7 @@
                             isClicked: false,
                         },
                         {
-                            name: "Il y a du pain sur la planche !!",
+                            name: "Il y a du cookie sur la planche !!",
                             clicks: 50,
                             message: "Bravo, vous avez clické 50 fois",
                             complete: false,
@@ -196,11 +196,11 @@
                 <div className="row">
                     
                     <div className="col-3 colorNougat rounded">
-                        <div className="m-2">
+                        <div className="m-2 padding10">
                             <h4 className="text-center">Succès à débloquer : </h4>
-                            <ul>
-                                {this.state.successes.map((success, index) =>
-                                    <li key={index}>{success.name} {success.complete === true ? " : Complété !" : ""}</li>
+                            <ul className="paddinLeftNull">
+                                {this.state.successes.map((success, index) => 
+                                    <div  key={index}>- {success.name} {success.complete === true ? " : Complété !" : ""}</div>
                                 )}
                             </ul>      
                         </div>
@@ -218,7 +218,7 @@
 
                         <h2>Nombre de clicks : {this.state.clicks}</h2>
 
-                        <img className="Cookie" onClick={this.incrementCounter} src={"./img/cookie.jpg"}/>
+                        <img className="Cookie" onClick={this.incrementCounter} src={"./img/cookie2.png"}/>
                         {this.state.message && <div className="alert">{this.state.message}</div>}
                     </div>
                     
@@ -325,13 +325,13 @@
 
                         {this.state.bigCookies >= 10 && 
                             <div>
-                                <h5>Dimnuer le temps de production de cookie !!</h5>
+                                <h5>Diminuer le temps de production de cookie !!</h5>
                                 <GlobalIncomeRiseButton click={() => this.lowerInterval()} />
                             </div>
                         }
                     </div>   
                 </div>  
-                <button onClick={this.test}>test</button>
+                
             </div>
         </div>
         )

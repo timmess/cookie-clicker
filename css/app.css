@@ -1,9 +1,13 @@
 .Cookie {
-    width: 100px;
+    width: 150px;
 }
 
 .colorNougat{
     background-color: rgb(204, 142, 105);
+}
+
+.paddinLeftNull{
+    padding-left: 0px !important;
 }
 
 .padding10{
