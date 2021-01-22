@@ -42,18 +42,18 @@
     constructor() {
         super();
         this.state = {
-            counter: 0,
+            counter: 50,
             bigCookies: 0,
             cookiesPerSecond: 0,
             clicks: 0,
-            mothers: 0,
+            mothers: 99,
             cooks: 0,
             interval: 1000,
             message: "",
             successes:
                     [
                         {
-                            name: "10 clicks",
+                            name: "Un petit effort...",
                             clicks: 10,
                             message: "Bravo, vous avez clické 10 fois",
                             complete: false,
@@ -61,7 +61,15 @@
                             isClicked: false,
                         },
                         {
-                            name: "100 clicks",
+                            name: "Il y a du pain sur la planche !!",
+                            clicks: 50,
+                            message: "Bravo, vous avez clické 50 fois",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "La pâte commence à monter !",
                             clicks: 100,
                             message: "Bravo, vous avez clické 100 fois",
                             complete: false,
@@ -69,9 +77,97 @@
                             isClicked: false,
                         },
                         {
-                            name: "1000 clicks",
+                            name: "Tu t'es levé tôt !",
+                            clicks: 250,
+                            message: "Bravo, vous avez clické 250 fois",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Maitre cuisinier !",
                             clicks: 1000,
                             message: "Bravo, vous avez clické 1000 fois",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Où ai-je mis mon dentier ??",
+                            mothers: 1,
+                            message: "Bravo, vous avez acheté 1 grand-mères",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Il va falloir plus de cannes...",
+                            mothers: 10,
+                            message: "Bravo, vous avez acheté 10 grand-mères",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Tu es la bonne voie, fils !",
+                            mothers: 50,
+                            message: "Bravo, vous avez acheté 50 grand-mères",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Directeur d'EHPAD",
+                            mothers: 100,
+                            message: "Bravo, vous avez acheté 100 grand-mères",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Bourreau des coeurs",
+                            mothers: 1000,
+                            message: "Bravo, vous avez acheté 100 grand-mères",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Apprenti cuisinier",
+                            cooks: 1,
+                            message: "Bravo, vous avez acheté 1 grand-mères",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Tu commences à prendre du gallon",
+                            cooks: 10,
+                            message: "Bravo, vous avez acheté 10 grand-mères",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Tu veux être chef ?",
+                            cooks: 50,
+                            message: "Bravo, vous avez acheté 50 grand-mères",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Ton nom c'est Philippe ?",
+                            cooks: 100,
+                            message: "Bravo, vous avez acheté 100 grand-mères",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Animateur Top Chef",
+                            cooks: 1000,
+                            message: "Bravo, vous avez acheté 100 grand-mères",
                             complete: false,
                             isDisplayed : false,
                             isClicked: false,
@@ -156,14 +252,18 @@
 
             <div className="container">
                 <div className="row">
-                    <div className="col-4 text-center mt-3 colorNougat">
+                    <div className="col-4 text-center mt-3 colorNougat padding10">
                         
                         <h3>Travailleurs :</h3>
-                        {this.state.counter >= 10 &&
+                        {this.state.counter >= 50 ?
                             <div className="mt-3">
                                 <button className="btn btn-dark" onClick={this.recruitMother}>Recruter une grand mère</button>
                                 <p>(+1 cookie par seconde)</p>
                             </div>
+
+                            :
+
+                            <p>Il vous faut plus de cookies !!!</p>
                         }
 
                         {this.state.counter >= 500 &&
@@ -183,14 +283,34 @@
                                     </div>
                                 </div> 
                             </div>
-                        )}       
+                        )}  
+                        
+                        {this.state.successes.map((success, index) => success.mothers === this.state.mothers &&
+                            <div key={index} className="container mt-2">
+                                <div className="col-12 text-center">
+                                    <div className="alert alert-success mb-0">
+                                        {success.message}
+                                    </div>
+                                </div> 
+                            </div>
+                        )}     
+                        
+                        {this.state.successes.map((success, index) => success.cooks === this.state.cooks &&
+                            <div key={index} className="container mt-2">
+                                <div className="col-12 text-center">
+                                    <div className="alert alert-success mb-0">
+                                        {success.message}
+                                    </div>
+                                </div> 
+                            </div>
+                        )}
                     </div>
 
-                    <div className="col-4 text-center mt-3 colorNougat">
+                    <div className="col-4 text-center mt-3 colorNougat padding10">
                         <h3>Améliorations :</h3>
                         {this.state.mothers >= 10 ?
                             <div>
-                                <span>Augmenter le revenu global de 100% !!</span>
+                                <h5>Augmenter le revenu global de 100% !!</h5>
                                 {this.state.successes.map((success, index) => 
                                     <div>
                                         {success.name} <GlobalIncomeRiseButton key={index} disabled={success.isClicked === true} click={() => this.updateCookieCounterBySuccessSetClicked()}/>  
@@ -201,7 +321,13 @@
                             <div>
                                 <p>Jouez pour accéder aux amélioration ! ;)</p>
                             </div>
-                            
+                        }
+
+                        {this.state.bigCookies >= 10 && 
+                            <div>
+                                <h5>Dimnuer le temps de production de cookie !!</h5>
+                                <GlobalIncomeRiseButton click={() => this.lowerInterval()} />
+                            </div>
                         }
                     </div>   
                 </div>  
@@ -221,6 +347,12 @@
         // Met à jour le state "complete" des success à true si les clicks du container ont atteint les clicks du success
         for (let i = 0; i < this.state.successes.length; i++) {
             if(this.state.clicks === this.state.successes[i].clicks && previousState.successes[i].complete == false){
+                this.setComplete(i)
+            }
+            if(this.state.mothers === this.state.successes[i].mothers && previousState.successes[i].complete == false){
+                this.setComplete(i)
+            }
+            if(this.state.cooks === this.state.successes[i].cooks && previousState.successes[i].complete == false){
                 this.setComplete(i)
             }
         }
@@ -315,8 +447,8 @@
             clicks: this.state.clicks +1,
         })
 
-        const a = Math.floor((Math.random() * 20) + 1);
-        const b = Math.floor((Math.random() * 20) + 1);
+        const a = Math.floor((Math.random() * 100) + 1);
+        const b = Math.floor((Math.random() * 100) + 1);
 
         if (a === b) {
             this.setState({
