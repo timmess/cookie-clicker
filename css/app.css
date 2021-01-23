@@ -1,5 +1,25 @@
+.appMargin{
+    margin-top: 10px;
+}
+
 .Cookie {
     width: 150px;
+}
+
+.littleCookieImg{
+    width: 20px;
+}
+
+.clickersCookieImg{
+    width: 50px;
+}
+
+.middleImg{
+    width: 100px;
+}
+
+.littleGrandmaImg{
+    width: 20px;
 }
 
 .colorNougat{
@@ -20,10 +40,6 @@
 
 .padding50{
     padding: 50px;
-}
-
-.appMargin{
-    margin-top: 100px;
 }
 
 .backgroundBlack{
