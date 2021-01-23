@@ -1,0 +1,17 @@
+<div className="col-4 text-center mt-3 colorNougat padding10 rounded">
+    <h3>Améliorations :</h3>
+    {this.state.mothers >= 10 ?
+        <div>
+            <h5>Augmenter le revenu global de 100% !!</h5>
+            {this.state.successes.map((success, index) => 
+                <div>
+                    {success.name} <GlobalIncomeRiseButton key={index} disabled={success.isClicked === true} click={() => this.updateCookieCounterBySuccessSetClicked()}/>  
+                </div>
+            )}
+        </div>
+        :
+        <div>
+            <h4>Cliquez !!</h4>
+        </div>
+    }
+</div> 

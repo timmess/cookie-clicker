@@ -160,7 +160,7 @@
                         {
                             name: "Bourreau des coeurs",
                             mothers: 1000,
-                            message: "Bravo, vous avez acheté 100 grand-mères",
+                            message: "Bravo, vous avez acheté 1000 grand-mères",
                             complete: false,
                             isDisplayed : false,
                             isClicked: false,
@@ -176,7 +176,7 @@
                         {
                             name: "Tu commences à prendre du gallon",
                             cooks: 10,
-                            message: "Bravo, vous avez acheté 10 grand-mères",
+                            message: "Bravo, vous avez acheté 10 Cuisiniers",
                             complete: false,
                             isDisplayed : false,
                             isClicked: false,
@@ -184,7 +184,7 @@
                         {
                             name: "Tu veux être chef ?",
                             cooks: 50,
-                            message: "Bravo, vous avez acheté 50 grand-mères",
+                            message: "Bravo, vous avez acheté 50 Cuisiniers",
                             complete: false,
                             isDisplayed : false,
                             isClicked: false,
@@ -192,7 +192,7 @@
                         {
                             name: "Ton nom c'est Philippe ?",
                             cooks: 100,
-                            message: "Bravo, vous avez acheté 100 grand-mères",
+                            message: "Bravo, vous avez acheté 100 Cuisiniers",
                             complete: false,
                             isDisplayed : false,
                             isClicked: false,
@@ -200,7 +200,15 @@
                         {
                             name: "Animateur Top Chef",
                             cooks: 1000,
-                            message: "Bravo, vous avez acheté 100 grand-mères",
+                            message: "Bravo, vous avez acheté 1000 Cuisiniers",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "De gros cookies !",
+                            bigCookies: 1,
+                            message: "Bravo, vous avez obtenu un gros cookie !",
                             complete: false,
                             isDisplayed : false,
                             isClicked: false,
@@ -264,10 +272,10 @@
                     </div>
 
                     <div className="col-3 colorNougat rounded">
-                        <div className="m-2">
-                            <ul>
-                                <h3 className="text-center">Vos clickers :</h3>
-                                {this.state.counter === 0 && 
+                        <div className="m-2 padding10">
+                            <ul className="paddinLeftNull">
+                                <h4>Vos clickers :</h4>
+                                {this.state.mothers < 1 && 
                                     <div>
                                         <h2 className="text-center mt-5">Cliquez sur le <img src="./img/cookie2.png" className="clickersCookieImg"/></h2>
                                         <h2 className="text-center mt-2">Vite !!!</h2>
@@ -308,7 +316,8 @@
                     </div>   
 
                     <div className="col-4 rounded">
-                        {this.state.successes.map((success, index) => success.clicks === this.state.clicks &&
+                        {// A factoriser
+                            this.state.successes.map((success, index) => success.clicks === this.state.clicks &&
                             <div key={index} className="container mt-2">
                                 <div className="col-12 text-center">
                                     <div className="alert alert-success mb-0">
@@ -337,11 +346,21 @@
                                 </div> 
                             </div>
                         )}
+
+                        {this.state.successes.map((success, index) => success.bigCookies === this.state.bigCookies &&
+                            <div key={index} className="container mt-2">
+                                <div className="col-12 text-center">
+                                    <div className="alert alert-success mb-0">
+                                        {success.message}
+                                    </div>
+                                </div> 
+                            </div>
+                        )}
                     </div>
 
                     <div className="col-4 text-center mt-3 colorNougat padding10 rounded">
                         <h3>Améliorations :</h3>
-                        {this.state.mothers >= 10000 ?
+                        {this.state.mothers >= 10 ?
                             <div>
                                 <h5>Augmenter le revenu global de 100% !!</h5>
                                 {this.state.successes.map((success, index) => 
@@ -401,6 +420,9 @@
                 this.setComplete(i)
             }
             if(this.state.cooks === this.state.successes[i].cooks && previousState.successes[i].complete == false){
+                this.setComplete(i)
+            }
+            if(this.state.bigCookies === this.state.successes[i].bigcookies && previousState.successes[i].complete == false){
                 this.setComplete(i)
             }
         }
