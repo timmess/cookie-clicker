@@ -23,7 +23,7 @@
 
   // Création de composant en créant des classes
 
-  class ClickersImage extends React.Component{
+  class Image extends React.Component{
     constructor(props){
         super(props);
     }
@@ -90,7 +90,7 @@
                             clicks: 10,
                             message: "Bravo, vous avez clické 10 fois",
                             complete: false,
-                            isDisplayed : false,
+                            isDisplayed: false,
                             isClicked: false,
                         },
                         {
@@ -98,7 +98,7 @@
                             clicks: 50,
                             message: "Bravo, vous avez clické 50 fois",
                             complete: false,
-                            isDisplayed : false,
+                            isDisplayed: false,
                             isClicked: false,
                         },
                         {
@@ -106,7 +106,7 @@
                             clicks: 100,
                             message: "Bravo, vous avez clické 100 fois",
                             complete: false,
-                            isDisplayed : false,
+                            isDisplayed: false,
                             isClicked: false,
                         },
                         {
@@ -114,7 +114,7 @@
                             clicks: 250,
                             message: "Bravo, vous avez clické 250 fois",
                             complete: false,
-                            isDisplayed : false,
+                            isDisplayed: false,
                             isClicked: false,
                         },
                         {
@@ -122,7 +122,7 @@
                             clicks: 1000,
                             message: "Bravo, vous avez clické 1000 fois",
                             complete: false,
-                            isDisplayed : false,
+                            isDisplayed: false,
                             isClicked: false,
                         },
                         {
@@ -130,7 +130,7 @@
                             mothers: 1,
                             message: "Bravo, vous avez acheté 1 grand-mères",
                             complete: false,
-                            isDisplayed : false,
+                            isDisplayed: false,
                             isClicked: false,
                         },
                         {
@@ -138,7 +138,7 @@
                             mothers: 10,
                             message: "Bravo, vous avez acheté 10 grand-mères",
                             complete: false,
-                            isDisplayed : false,
+                            isDisplayed: false,
                             isClicked: false,
                         },
                         {
@@ -146,7 +146,7 @@
                             mothers: 50,
                             message: "Bravo, vous avez acheté 50 grand-mères",
                             complete: false,
-                            isDisplayed : false,
+                            isDisplayed: false,
                             isClicked: false,
                         },
                         {
@@ -154,7 +154,7 @@
                             mothers: 100,
                             message: "Bravo, vous avez acheté 100 grand-mères",
                             complete: false,
-                            isDisplayed : false,
+                            isDisplayed: false,
                             isClicked: false,
                         },
                         {
@@ -162,7 +162,7 @@
                             mothers: 1000,
                             message: "Bravo, vous avez acheté 1000 grand-mères",
                             complete: false,
-                            isDisplayed : false,
+                            isDisplayed: false,
                             isClicked: false,
                         },
                         {
@@ -170,7 +170,7 @@
                             cooks: 1,
                             message: "Bravo, vous avez acheté 1 grand-mères",
                             complete: false,
-                            isDisplayed : false,
+                            isDisplayed: false,
                             isClicked: false,
                         },
                         {
@@ -178,7 +178,7 @@
                             cooks: 10,
                             message: "Bravo, vous avez acheté 10 Cuisiniers",
                             complete: false,
-                            isDisplayed : false,
+                            isDisplayed: false,
                             isClicked: false,
                         },
                         {
@@ -186,7 +186,7 @@
                             cooks: 50,
                             message: "Bravo, vous avez acheté 50 Cuisiniers",
                             complete: false,
-                            isDisplayed : false,
+                            isDisplayed: false,
                             isClicked: false,
                         },
                         {
@@ -194,7 +194,7 @@
                             cooks: 100,
                             message: "Bravo, vous avez acheté 100 Cuisiniers",
                             complete: false,
-                            isDisplayed : false,
+                            isDisplayed: false,
                             isClicked: false,
                         },
                         {
@@ -202,13 +202,37 @@
                             cooks: 1000,
                             message: "Bravo, vous avez acheté 1000 Cuisiniers",
                             complete: false,
+                            isDisplayed: false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "De gros cookies",
+                            bigCookies: 1,
+                            message: "Bravo, vous avez obtenu un gros cookie !",
+                            complete: false,
                             isDisplayed : false,
                             isClicked: false,
                         },
                         {
-                            name: "De gros cookies !",
-                            bigCookies: 1,
-                            message: "Bravo, vous avez obtenu un gros cookie !",
+                            name: "Plus de gros cookies !",
+                            bigCookies: 10,
+                            message: "Bravo, vous avez obtenu 10 gros cookie !",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Il va falloir construire une usine..",
+                            bigCookies: 100,
+                            message: "Bravo, vous avez obtenu 100 gros cookie !",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Willie Wonka !",
+                            bigCookies: 1000,
+                            message: "Bravo, vous avez obtenu 1000 gros cookie !",
                             complete: false,
                             isDisplayed : false,
                             isClicked: false,
@@ -241,9 +265,9 @@
                     <div className="col-3 colorNougat rounded">
                         <div className="m-2 padding10">
                             <h4 className="text-center">Succès à débloquer : </h4>
-                            <ul className="paddinLeftNull">
+                            <ul className="paddingLeftNull">
                                 {this.state.successes.map((success, index) => 
-                                    <div  key={index}>- {success.name} {success.complete === true ? " : Complété !" : ""}</div>
+                                    <div  key={index}>- {success.name} {success.complete === true ? <img className="littleCookieImg" src="./img/checked.png" /> : ""}</div>
                                 )}
                             </ul>      
                         </div>
@@ -266,14 +290,14 @@
                         <h3>Nombre de clicks : {this.state.clicks}</h3>
 
                         <img className="Cookie" onClick={this.incrementCounter} src={"./img/cookie2.png"}/>
-                        {this.state.message && <div className="alert">{this.state.message}</div>}
+                            {this.state.message && <div className="alert">{this.state.message}</div>}
                         <br/>
 
                     </div>
 
                     <div className="col-3 colorNougat rounded">
                         <div className="m-2 padding10">
-                            <ul className="paddinLeftNull">
+                            <ul className="paddingLeftNull">
                                 <h4>Vos clickers :</h4>
                                 {this.state.mothers < 1 && 
                                     <div>
@@ -364,7 +388,7 @@
                             <div>
                                 <h5>Augmenter le revenu global de 100% !!</h5>
                                 {this.state.successes.map((success, index) => 
-                                    <div>
+                                    <div key={index}>
                                         {success.name} <GlobalIncomeRiseButton key={index} disabled={success.isClicked === true} click={() => this.updateCookieCounterBySuccessSetClicked()}/>  
                                     </div>
                                 )}
@@ -399,6 +423,7 @@
                     }
                 </div>
                 </div>
+                <button onClick={this.test}>test</button>
             </div>
         </div>
         )
@@ -413,16 +438,16 @@
     componentDidUpdate(previousProps, previousState) {
         
         for (let i = 0; i < this.state.successes.length; i++) {
-            if(this.state.clicks === this.state.successes[i].clicks && previousState.successes[i].complete == false){
+            if(this.state.clicks === this.state.successes[i].clicks && previousState.successes[i].complete === false){
                 this.setComplete(i)
             }
-            if(this.state.mothers === this.state.successes[i].mothers && previousState.successes[i].complete == false){
+            if(this.state.mothers === this.state.successes[i].mothers && previousState.successes[i].complete === false){
                 this.setComplete(i)
             }
-            if(this.state.cooks === this.state.successes[i].cooks && previousState.successes[i].complete == false){
+            if(this.state.cooks === this.state.successes[i].cooks && previousState.successes[i].complete === false){
                 this.setComplete(i)
             }
-            if(this.state.bigCookies === this.state.successes[i].bigcookies && previousState.successes[i].complete == false){
+            if(this.state.bigCookies === this.state.successes[i].bigCookies && previousState.successes[i].complete === false){
                 this.setComplete(i)
             }
         }
