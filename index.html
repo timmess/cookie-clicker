@@ -61,7 +61,7 @@
             demesuredCookies: 0,
             gargantueskCookies: 0,
             cookiesPerSecond: 0,
-            clicks: 0,
+            clicks: 10,
             clickers: [
                 {
                     name: "mothers",
@@ -74,6 +74,8 @@
                     name: "cooks",
                     number: 0,
                     cookiesPerSecond: 5,
+                    price: 50,
+                    increment: 20,
                 }
             ],
             mothers: 0,
@@ -279,11 +281,11 @@
 
                         <h2>Cookies : {this.state.counter}</h2>
 
-                        <h3>Gros cookies (10 <img src="./img/cookie2.png" className="littleCookieImg" />) : {this.state.bigCookies}</h3>
+                        {this.state.bigCookies > 0 && <h3>Gros cookies (10 <img src="./img/cookie2.png" className="littleCookieImg" />) : {this.state.bigCookies}</h3>}
                         
-                        <h3>Cookie démesuré (100 <img src="./img/cookie2.png" className="littleCookieImg" />) : {this.state.demesuredCookies}</h3>
+                        {this.state.demesuredCookies > 0 && <h3>Cookie démesuré (100 <img src="./img/cookie2.png" className="littleCookieImg" />) : {this.state.demesuredCookies}</h3>}
                         
-                        <h3>Cookie gargantuesque (1000 <img src="./img/cookie2.png" className="littleCookieImg" />) : {this.state.gargantueskCookies}</h3>
+                        {this.state.gargantueskCookies > 0 && <h3>Cookie gargantuesque (1000 <img src="./img/cookie2.png" className="littleCookieImg" />) : {this.state.gargantueskCookies}</h3>}
 
                         <h3>Cookies par seconde : {this.state.cookiesPerSecond}</h3>
 
@@ -342,9 +344,9 @@
                     <div className="col-4 rounded">
                         {// A factoriser
                             this.state.successes.map((success, index) => success.clicks === this.state.clicks &&
-                            <div key={index} className="container mt-2">
+                            <div key={index} className="container">
                                 <div className="col-12 text-center">
-                                    <div className="alert alert-success mb-0">
+                                    <div className="alert alert-success mb-0 mt-5">
                                         {success.message}
                                     </div>
                                 </div> 
@@ -352,7 +354,7 @@
                         )}  
                         
                         {this.state.successes.map((success, index) => success.mothers === this.state.mothers &&
-                            <div key={index} className="container mt-2">
+                            <div key={index} className="container">
                                 <div className="col-12 text-center">
                                     <div className="alert alert-success mb-0">
                                         {success.message}
@@ -362,7 +364,7 @@
                         )}     
                         
                         {this.state.successes.map((success, index) => success.cooks === this.state.cooks &&
-                            <div key={index} className="container mt-2">
+                            <div key={index} className="container">
                                 <div className="col-12 text-center">
                                     <div className="alert alert-success mb-0">
                                         {success.message}
@@ -372,7 +374,7 @@
                         )}
 
                         {this.state.successes.map((success, index) => success.bigCookies === this.state.bigCookies &&
-                            <div key={index} className="container mt-2">
+                            <div key={index} className="container">
                                 <div className="col-12 text-center">
                                     <div className="alert alert-success mb-0">
                                         {success.message}
@@ -418,7 +420,7 @@
 
                         <div>
                             <h4>Il vous faut 10 gros cookies !</h4>
-                            <h4>Cliquez !!</h4>  
+                            <h4>Cliquez sur le <img src="./img/cookie2.png" className="littleCookieImg"/> pour en avoir !!</h4>  
                         </div>
                     }
                 </div>
@@ -432,8 +434,6 @@
     test(){
         console.log(this.state.successes)
     }
-
-    
     
     componentDidUpdate(previousProps, previousState) {
         
@@ -517,31 +517,31 @@
     }
 
     /**
-     * Augmenter le débit des cookies de 1
+     * Augmenter le débit des cookies de 1, mets à jour le prix des grandmas, le nombre de grandmas et déduis le prix dr la grandma au counter
      */
     recruitMother() {
         this.setState({
             counter: this.state.counter - this.state.mothersPrice,
             cookiesPerSecond: this.state.cookiesPerSecond + 1,
             mothers: this.state.mothers +1,
-            mothersPrice : this.state.mothersPrice + 10
+            mothersPrice : this.state.mothersPrice *2
         })
     }
 
     /**
-     * Augmenter le débit des cookies de 5
+     * Augmenter le débit des cookies de 5, mets à jour le prix des cooks, le nombre de cooks et déduis le prix du cook au counter
      */
     recruitCook() {
         this.setState({
             counter: this.state.counter - this.state.cooksPrice,
             cookiesPerSecond: this.state.cookiesPerSecond +5,
             cooks: this.state.cooks +1,
-            cooksPrice : this.state.cooksPrice + 50,
+            cooksPrice : this.state.cooksPrice * 2,
         })
     }
 
     /**
-     * Augmenter de 1 la valeur du state de counter
+     * Augmenter de 1 la valeur du state de counter et génère des augmentations aléatoires
      */
     incrementCounter() {
         this.setState({
