@@ -21,6 +21,9 @@
 <div id="root"></div>
 <script type="text/babel">
 
+let littleCookieImg = <img src="./img/cookie2.png" className="littleCookieImg"/>;
+let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/>;
+
   // Création de composant en créant des classes
 
   class Image extends React.Component{
@@ -84,6 +87,8 @@
             cooksPrice: 50,
             mothersCooks: 0,
             mothersCooksPrice: 500,
+            chiefsMothers: 0,
+            chiefsMothersPrice: 5000,
             interval: 1000,
             newInterval: 1000,
             message: "",
@@ -91,6 +96,7 @@
                     [
                         {
                             name: "Un petit effort...",
+                            but: "10 clicks",
                             clicks: 10,
                             message: "Bravo, vous avez clické 10 fois",
                             complete: false,
@@ -99,6 +105,7 @@
                         },
                         {
                             name: "Il y a du cookie sur la planche !!",
+                            but: "50 clicks",
                             clicks: 50,
                             message: "Bravo, vous avez clické 50 fois",
                             complete: false,
@@ -107,6 +114,7 @@
                         },
                         {
                             name: "La pâte commence à monter !",
+                            but: "100 clicks",
                             clicks: 100,
                             message: "Bravo, vous avez clické 100 fois",
                             complete: false,
@@ -115,6 +123,7 @@
                         },
                         {
                             name: "Tu t'es levé tôt !",
+                            but: "250 clicks",
                             clicks: 250,
                             message: "Bravo, vous avez clické 250 fois",
                             complete: false,
@@ -123,6 +132,7 @@
                         },
                         {
                             name: "Maitre cuisinier !",
+                            but: "1000 clicks",
                             clicks: 1000,
                             message: "Bravo, vous avez clické 1000 fois",
                             complete: false,
@@ -131,6 +141,7 @@
                         },
                         {
                             name: "Où ai-je mis mon dentier ??",
+                            but: "1 grand-mère",
                             mothers: 1,
                             message: "Bravo, vous avez acheté 1 grand-mères",
                             complete: false,
@@ -139,6 +150,7 @@
                         },
                         {
                             name: "Il va falloir plus de cannes...",
+                            but: "10 grand-mère",
                             mothers: 10,
                             message: "Bravo, vous avez acheté 10 grand-mères",
                             complete: false,
@@ -147,6 +159,7 @@
                         },
                         {
                             name: "Tu es la bonne voie, fils !",
+                            but: "50 grand-mère",
                             mothers: 50,
                             message: "Bravo, vous avez acheté 50 grand-mères",
                             complete: false,
@@ -155,6 +168,7 @@
                         },
                         {
                             name: "Directeur d'EHPAD",
+                            but: "100 grand-mère",
                             mothers: 100,
                             message: "Bravo, vous avez acheté 100 grand-mères",
                             complete: false,
@@ -163,6 +177,7 @@
                         },
                         {
                             name: "Bourreau des coeurs",
+                            but: "1000 grand-mère",
                             mothers: 1000,
                             message: "Bravo, vous avez acheté 1000 grand-mères",
                             complete: false,
@@ -171,6 +186,7 @@
                         },
                         {
                             name: "Apprenti cuisinier",
+                            but: "1 cuisinier",
                             cooks: 1,
                             message: "Bravo, vous avez acheté 1 cuisinier",
                             complete: false,
@@ -179,6 +195,7 @@
                         },
                         {
                             name: "Tu commences à prendre du gallon",
+                            but: "10 cuisinier",
                             cooks: 10,
                             message: "Bravo, vous avez acheté 10 Cuisiniers",
                             complete: false,
@@ -187,6 +204,7 @@
                         },
                         {
                             name: "Tu veux être chef ?",
+                            but: "50 cuisinier",
                             cooks: 50,
                             message: "Bravo, vous avez acheté 50 Cuisiniers",
                             complete: false,
@@ -195,6 +213,7 @@
                         },
                         {
                             name: "Ton nom c'est Philippe ?",
+                            but: "100 cuisinier",
                             cooks: 100,
                             message: "Bravo, vous avez acheté 100 Cuisiniers",
                             complete: false,
@@ -203,6 +222,7 @@
                         },
                         {
                             name: "Animateur Top Chef",
+                            but: "1000 cuisinier",
                             cooks: 1000,
                             message: "Bravo, vous avez acheté 1000 Cuisiniers",
                             complete: false,
@@ -210,7 +230,98 @@
                             isClicked: false,
                         },
                         {
+                            name: "La crème des grand-mères !",
+                            but: "1 grand-mère cuisinière",
+                            mothersCooks: 1,
+                            message: "Bravo, vous avez acheté 1 Grand-mère cuisinière",
+                            complete: false,
+                            isDisplayed: false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Quelle hardeur !!",
+                            but: "10 grand-mère cuisinière",
+                            mothersCooks: 10,
+                            message: "Bravo, vous avez acheté 10 Grand-mère cuisinière",
+                            complete: false,
+                            isDisplayed: false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "On ne l'arette plus !",
+                            but: "50 grand-mère cuisinière",
+                            mothersCooks: 50,
+                            message: "Bravo, vous avez acheté 50 Grand-mère  cuisinière",
+                            complete: false,
+                            isDisplayed: false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Cuisinière jusqu'à la mort !",
+                            but: "100 grand-mère cuisinière",
+                            mothersCooks: 100,
+                            message: "Bravo, vous avez acheté 100 Grand-mère cuisinière",
+                            complete: false,
+                            isDisplayed: false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Maïté je t'ai vu la...",
+                            but: "1000 grand-mère cuisinière",
+                            mothersCooks: 1000,
+                            message: "Bravo, vous avez acheté 1000 Grand-mère cuisinière",
+                            complete: false,
+                            isDisplayed: false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "La crème des cheffes !",
+                            but: "1 grand-mère cheffe cuisinière",
+                            chiefsMothers: 1,
+                            message: "Bravo, vous avez acheté 1 Grand-mère cheffe cuisinière",
+                            complete: false,
+                            isDisplayed: false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Je te ressers une assiette !!",
+                            but: "10 grand-mère cheffe cuisinière",
+                            chiefsMothers: 10,
+                            message: "Bravo, vous avez acheté 10 Grand-mère cheffe cuisinière",
+                            complete: false,
+                            isDisplayed: false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Tant de grand-mères dans une si petite cuisine ??",
+                            but: "50 grand-mère cheffe cuisinière",
+                            chiefsMothers: 50,
+                            message: "Bravo, vous avez acheté 50 Grand-mère cheffe cuisinière",
+                            complete: false,
+                            isDisplayed: false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Il va falloir songer à appeler sa grand-mère",
+                            but: "100 grand-mère cheffe cuisinière",
+                            chiefsMothers: 100,
+                            message: "Bravo, vous avez acheté 100 Grand-mère cheffe cuisinière",
+                            complete: false,
+                            isDisplayed: false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Grandma style !!",
+                            but: "1000 grand-mère cheffe cuisinière",
+                            chiefsMothers: 1000,
+                            message: "Bravo, vous avez acheté 1000 Grand-mère cheffe cuisinière",
+                            complete: false,
+                            isDisplayed: false,
+                            isClicked: false,
+                        },
+                        {
                             name: "De gros cookies",
+                            but: "1 gros cookie",
                             bigCookies: 1,
                             message: "Bravo, vous avez obtenu un gros cookie !",
                             complete: false,
@@ -219,6 +330,7 @@
                         },
                         {
                             name: "Plus de gros cookies !",
+                            but: "10 gros cookie",
                             bigCookies: 10,
                             message: "Bravo, vous avez obtenu 10 gros cookie !",
                             complete: false,
@@ -227,6 +339,7 @@
                         },
                         {
                             name: "Il va falloir construire une usine..",
+                            but: "100 gros cookie",
                             bigCookies: 100,
                             message: "Bravo, vous avez obtenu 100 gros cookie !",
                             complete: false,
@@ -235,8 +348,45 @@
                         },
                         {
                             name: "Willie Wonka !",
+                            but: "1000 gros cookie",
                             bigCookies: 1000,
                             message: "Bravo, vous avez obtenu 1000 gros cookie !",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Un cookie hors-norme",
+                            but: "1 cookie démesuré",
+                            demesuredCookies: 1,
+                            message: "Bravo, vous avez obtenu un cookie démesuré !",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Cookies continentaux",
+                            but: "10 gros cookie",
+                            demesuredCookies: 10,
+                            message: "Bravo, vous avez obtenu 10 cookies démesurés !",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "Un cookie de la taille de ma...",
+                            but: "1 cookie démesuré",
+                            gargantueskCookies: 1,
+                            message: "Bravo, vous avez obtenu un cookie gargantuesque !",
+                            complete: false,
+                            isDisplayed : false,
+                            isClicked: false,
+                        },
+                        {
+                            name: "...motivation pour développer un cookie clicker :DDDDD",
+                            but: "10 gros cookie",
+                            gargantueskCookies: 10,
+                            message: "Bravo, vous avez obtenu 10 cookies gargantuesques !",
                             complete: false,
                             isDisplayed : false,
                             isClicked: false,
@@ -254,11 +404,11 @@
         this.lowerInterval = this.lowerInterval.bind(this);
         this.setClicked = this.setClicked.bind(this);
         this.recruitMothersCook = this.recruitMothersCook.bind(this);
+        this.recruitChiefMothers = this.recruitChiefMothers.bind(this);
         
         this.interval = setInterval(this.updateCookiesCounter, this.state.interval);
 
 
-        this.test = this.test.bind(this);
     }
 
     render() {
@@ -269,10 +419,12 @@
                 <div className="row">
                     <div className="col-3 colorNougat rounded">
                         <div className="m-2 padding10">
-                            <h4 className="text-center">Succès à débloquer : </h4>
+                            <h4>Succès : </h4>
                             <ul className="paddingLeftNull">
-                                {this.state.successes.map((success, index) => 
-                                    <div  key={index}>- {success.name} {success.complete === true ? <img className="littleCookieImg" src="./img/checked.png" /> : ""}</div>
+                                {this.state.successes.map((success, index) => success.complete === true &&
+                                    <div  key={index}>
+                                        <p>- {success.name} {success.complete === true ? <img src="./img/checked.png" className="littleCookieImg"/> : ""} <br/> ({success.but})</p>
+                                    </div>
                                 )}
                             </ul>      
                         </div>
@@ -284,11 +436,11 @@
 
                         <h2>Cookies : {Math.round(this.state.counter)}</h2>
 
-                        {this.state.bigCookies > 0 && <h3>Gros cookies (10 <img src="./img/cookie2.png" className="littleCookieImg" />) : {this.state.bigCookies}</h3>}
+                        {this.state.bigCookies > 0 && <h3>Gros cookies (10 {littleCookieImg}) : {this.state.bigCookies}</h3>}
                         
-                        {this.state.demesuredCookies > 0 && <h3>Cookie démesuré (100 <img src="./img/cookie2.png" className="littleCookieImg" />) : {this.state.demesuredCookies}</h3>}
+                        {this.state.demesuredCookies > 0 && <h3>Cookie démesuré (100 {littleCookieImg}) : {this.state.demesuredCookies}</h3>}
                         
-                        {this.state.gargantueskCookies > 0 && <h3>Cookie gargantuesque (1000 <img src="./img/cookie2.png" className="littleCookieImg" />) : {this.state.gargantueskCookies}</h3>}
+                        {this.state.gargantueskCookies > 0 && <h3>Cookie gargantuesque (1000 {littleCookieImg}) : {this.state.gargantueskCookies}</h3>}
 
                         <h3>Cookies par seconde : {Math.round(this.state.cookiesPerSecond)}</h3>
 
@@ -302,31 +454,35 @@
 
                     <div className="col-3 colorNougat rounded">
                         <div className="m-2 padding10">
-                            <ul className="paddingLeftNull">
-                                <h4>Vos clickers :</h4>
+                            <h4>Vos clickers :</h4>
+                            <div className="paddingLeftNull list-group">
                                 {this.state.mothers < 1 && 
                                     <div>
-                                        <h2 className="text-center mt-5">Cliquez sur le <img src="./img/cookie2.png" className="clickersCookieImg"/></h2>
-                                        <h2 className="text-center mt-2">Vite !!!</h2>
+                                        <h2 className="text-center mt-5">Cliquez sur le {middleCookieImg}</h2>
                                     </div>
                                 }                                
                                 {this.state.mothers >= 1 && 
                                     // A factoriser
-                                    <li className="my-3">
-                                        Grand-mères : {this.state.mothers} (+{this.state.mothers} cookies / s)
-                                    </li>
+                                    <div className="my-2">
+                                        - Grand-mères : {this.state.mothers} (+{this.state.mothers} cookies / s)
+                                    </div>
                                 }
                                 {this.state.cooks >= 1 && 
-                                    <li className="my-3">
-                                        Cuisiniers : {this.state.cooks} (+{this.state.cooks * 5} cookies / s)
-                                    </li>
+                                    <div className="my-2">
+                                        - Cuisiniers : {this.state.cooks} (+{this.state.cooks * 5} cookies / s)
+                                    </div>
                                 }
                                 {this.state.mothersCooks >= 1 && 
-                                    <li className="my-3">
-                                        Grands-mères cuisinières : {this.state.mothersCooks} (+{this.state.mothersCooks * 10} cookies / s)
-                                    </li>
+                                    <div className="my-2">
+                                        - Grands-mères cuisinières : {this.state.mothersCooks} (+{this.state.mothersCooks * 10} cookies / s)
+                                    </div>
                                 }
-                            </ul>
+                                {this.state.chiefsMothers >= 1 && 
+                                    <div className="my-2">
+                                        - Grands-mères cheffes cuisinières : {this.state.chiefsMothers} (+{this.state.chiefsMothers * 20} cookies / s)
+                                    </div>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -338,13 +494,13 @@
                         <h3>Travailleurs :</h3>
                             <div className="mt-3">
                                 <button className="btn btn-dark" disabled={this.state.counter < this.state.mothersPrice} onClick={this.recruitMother}>Recruter une grand mère ({this.state.mothersPrice} <img src="./img/cookie2.png" className="littleCookieImg"/>)</button>
-                                <p>(+1 <img src="./img/cookie2.png" className="littleCookieImg"/> par seconde)</p>
+                                <p>(+1 {littleCookieImg} par seconde)</p>
                             </div>
 
                             {this.state.mothers >= 10 ?
                                 <div className="mt-3">
                                     <button className="btn btn-dark" disabled={this.state.counter < this.state.cooksPrice} onClick={this.recruitCook}>Recruter un cuisinier ({this.state.cooksPrice} <img src="./img/cookie2.png" className="littleCookieImg"/>)</button>
-                                    <p>(+5 <img src="./img/cookie2.png" className="littleCookieImg"/>) par seconde)</p>
+                                    <p>(+5 {littleCookieImg}) par seconde)</p>
                                 </div>
                                 :
                                 <div>
@@ -356,6 +512,13 @@
                                 <div className="mt-3">
                                     <button className="btn btn-dark" disabled={this.state.counter < this.state.mothersCooksPrice} onClick={this.recruitMothersCook}>Recruter une grand mère cuisinière ({this.state.mothersCooksPrice} <img src="./img/cookie2.png" className="littleCookieImg"/>)</button>
                                     <p>(+10 <img src="./img/cookie2.png" className="littleCookieImg"/>) par seconde)</p>
+                                </div>
+                            }
+
+                            {this.state.mothersCooks >= 10 &&
+                                <div className="mt-3">
+                                    <button className="btn btn-dark" disabled={this.state.counter < this.state.chiefsMothersPrice} onClick={this.recruitChiefMothers}>Recruter une grand mère cheffe cuisinière ({this.state.chiefsMothersPrice} <img src="./img/cookie2.png" className="littleCookieImg"/>)</button>
+                                    <p>(+20 <img src="./img/cookie2.png" className="littleCookieImg"/>) par seconde)</p>
                                 </div>
                             }
                     </div>   
@@ -400,9 +563,41 @@
                                     </div>
                                 </div> 
                             </div>
+                        )}   
+                        
+                        {this.state.successes.map((success, index) => success.chiefsMothers === this.state.chiefsMothers &&
+                            <div key={index} className="container">
+                                <div className="col-12 text-center">
+                                    <div className="alert alert-success mb-0">
+                                        {success.message}
+                                    </div>
+                                </div> 
+                            </div>
                         )}
 
                         {this.state.successes.map((success, index) => success.bigCookies === this.state.bigCookies &&
+                            <div key={index} className="container">
+                                <div className="col-12 text-center">
+                                    <div className="alert alert-success mb-0">
+                                        {success.message}
+                                    </div>
+                                </div> 
+                            </div>
+                        )}
+
+                        {this.state.successes.map((success, index) => success.demesuredCookies === this.state.demesuredCookies &&
+                            <div key={index} className="container">
+                                <div className="col-12 text-center">
+                                    <div className="alert alert-success mb-0">
+                                        {success.message}
+                                    </div>
+                                </div> 
+                            </div>
+                        )}
+
+                        
+
+                        {this.state.successes.map((success, index) => success.gargantueskCookies === this.state.gargantueskCookies &&
                             <div key={index} className="container">
                                 <div className="col-12 text-center">
                                     <div className="alert alert-success mb-0">
@@ -415,6 +610,7 @@
 
                     <div className="col-4 text-center mt-3 colorNougat padding10 rounded">
                         <h3>Améliorations :</h3>
+
                         {this.state.mothers >= 2 ?
                             <div className="padding10">
                                 <h5>Augmenter le revenu global de 100% !!</h5>
@@ -426,9 +622,7 @@
                                 )}
                             </div>
                             :
-                            <div>
-                                <h4>Cliquez !!</h4>
-                            </div>
+                            <h4 className="mt-5">Cliquez sur le {littleCookieImg}</h4>
                         }
                     </div>   
                 </div>  
@@ -436,39 +630,36 @@
 
             <div className="container mt-2">
                 <div className="row  padding10">
-                <div className="col-4">
-                </div>
-                <div className="col-4 padding10 text-center colorNougat rounded">
-                    <h3>Diminuer l'intervalle de temps !</h3>
-                    {this.state.bigCookies === 10 && this.state.newInterval === 1000 ? 
-                        <div>
-                            <button className="btn btn-dark" onClick={() => this.lowerInterval()}>Diminuer</button>
-                            <p>Actuellement : {this.state.newInterval / 1000} seconde</p>    
-                        </div>
+                    <div className="col-4"></div>
 
-                        :
+                    <div className="col-4 padding10 text-center colorNougat rounded">
+                        <h3>Diminuer l'intervalle de temps !</h3>
+                        <h5>Il va vous falloir de gros cookies...</h5>
+                        {this.state.bigCookies === 10 && this.state.newInterval === 1000 ? 
+                            <div>
+                                <button className="btn btn-dark" onClick={() => this.lowerInterval()}>Diminuer</button>
+                                <p>Actuellement : {this.state.newInterval / 1000} seconde</p>    
+                            </div>
 
-                        <div>
-                            <p>Actuellement : {this.state.newInterval / 1000} seconde</p>   
-                        </div>
-                    }
+                            :
 
-                    {this.state.bigCookies === 100 && this.state.newInterval === 1000 && 
-                        <div>
-                            <button className="btn btn-dark" onClick={() => this.lowerInterval()}>Diminuer</button> 
-                        </div>
-                    }
+                            <div>
+                                <p>Actuellement : {this.state.newInterval / 1000} seconde</p>   
+                            </div>
+                        }
+
+                        {this.state.bigCookies === 100 && this.state.newInterval === 1000 && 
+                            <div>
+                                <button className="btn btn-dark" onClick={() => this.lowerInterval()}>Diminuer</button> 
+                            </div>
+                        }
+                    </div>
                 </div>
-                </div>
-                <button onClick={this.test}>test</button>
             </div>
         </div>
         )
     }
 
-    test(){
-        console.log(this.state.successes)
-    }
     
     componentDidUpdate(previousProps, previousState) {
         
@@ -482,17 +673,35 @@
             if(this.state.cooks === this.state.successes[i].cooks && previousState.successes[i].complete === false){
                 this.setComplete(i)
             }
+            if(this.state.mothersCooks === this.state.successes[i].mothersCooks && previousState.successes[i].complete === false){
+                this.setComplete(i)
+            }
+            if(this.state.chiefsMothers === this.state.successes[i].chiefsMothers && previousState.successes[i].complete === false){
+                this.setComplete(i)
+            }
             if(this.state.bigCookies === this.state.successes[i].bigCookies && previousState.successes[i].complete === false){
+                this.setComplete(i)
+            }
+            if(this.state.demesuredCookies === this.state.successes[i].demesuredCookies && previousState.successes[i].complete === false){
+                this.setComplete(i)
+            }
+            if(this.state.gargantueskCookies === this.state.successes[i].gargantueskCookies && previousState.successes[i].complete === false){
                 this.setComplete(i)
             }
         }
     }
 
+    /**
+     * Fonction qui rassemble les fonctions updateCookieCounterBySuccess() et setClicked() pour les appeler en même temps au click d'un bouton
+     */
     updateCookieCounterBySuccessSetClicked(index) {
         this.updateCookieCounterBySuccess()
         this.setClicked(index)
     }
 
+    /**
+     * Met à jour le state isClicked d'un success
+     */
     setClicked(index){
         const newSuccesses = this.state.successes;
 
@@ -546,9 +755,6 @@
         })
     }
     
-
-    
-
     /**
      * Augmenter le débit des cookies de 1, mets à jour le prix des grandmas, le nombre de grandmas et déduis le prix dr la grandma au counter
      */
@@ -569,7 +775,7 @@
             counter: this.state.counter - this.state.cooksPrice,
             cookiesPerSecond: this.state.cookiesPerSecond +5,
             cooks: this.state.cooks +1,
-            cooksPrice : this.state.cooksPrice + 40,
+            cooksPrice : this.state.cooksPrice + 100,
         })
     }
 
@@ -581,7 +787,19 @@
             counter: this.state.counter - this.state.mothersCooksPrice,
             cookiesPerSecond: this.state.cookiesPerSecond + 10,
             mothersCooks: this.state.mothersCooks +1,
-            mothersCooksPrice : this.state.mothersCooksPrice + 80,
+            mothersCooksPrice : this.state.mothersCooksPrice + 1000,
+        })
+    }
+
+    /**
+     * Augmenter le débit des cookies de 1, mets à jour le prix des grandmas, le nombre de grandmas et déduis le prix dr la grandma au counter
+     */
+     recruitChiefMothers() {
+        this.setState({
+            counter: this.state.counter - this.state.chiefsMothersPrice,
+            cookiesPerSecond: this.state.cookiesPerSecond + 20,
+            chiefsMothers: this.state.chiefsMothers +1,
+            chiefsMothersPrice : this.state.chiefsMothersPrice + 10000
         })
     }
 
