@@ -60,7 +60,7 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
         super();
         this.state = {
             counter: 0,
-            bigCookies: 0,
+            bigCookies: 10,
             demesuredCookies: 0,
             gargantueskCookies: 0,
             cookiesPerSecond: 0,
@@ -415,22 +415,58 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
         return (
         <div className="appMargin">
 
-            <div className="container align-self-center">
+            <div className="container-fluid align-self-center">
                 <div className="row">
-                    <div className="col-3 colorNougat rounded">
+                    
+                    <div className="col-2 border colorNougat rounded">
                         <div className="m-2 padding10">
                             <h4>Succès : </h4>
-                            <ul className="paddingLeftNull">
-                                {this.state.successes.map((success, index) => success.complete === true &&
-                                    <div  key={index}>
-                                        <p>- {success.name} {success.complete === true ? <img src="./img/checked.png" className="littleCookieImg"/> : ""} <br/> ({success.but})</p>
-                                    </div>
-                                )}
-                            </ul>      
+                            <p> 0 / {this.state.successes.length} achevés</p>
+                            <div className="container paddingLeftNull">
+                                <div className="row">
+                                    {this.state.successes.map((success, index) => success.complete === true &&
+                                        <div className="col-6 border border-secondary" key={index}>
+                                            <span className="fw-bold">{success.name}</span> {success.complete === true ? <img src="./img/checked.png" className="littleCookieImg"/> : ""} <br/>({success.but})
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div className="col-2 text-center colorNougat padding10 rounded">
+                        <h3>Travailleurs :</h3>
+                            <div className="mt-3">
+                                <button className="btn btn-dark" disabled={this.state.counter < this.state.mothersPrice} onClick={this.recruitMother}>Recruter une grand mère ({this.state.mothersPrice} <img src="./img/cookie2.png" className="littleCookieImg"/>)</button>
+                                <p>(+1 {littleCookieImg} par seconde)</p>
+                            </div>
 
-                    <div className="col-6 text-center rounded">
+                            {this.state.mothers >= 10 ?
+                                <div className="mt-3">
+                                    <button className="btn btn-dark" disabled={this.state.counter < this.state.cooksPrice} onClick={this.recruitCook}>Recruter un cuisinier ({this.state.cooksPrice} <img src="./img/cookie2.png" className="littleCookieImg"/>)</button>
+                                    <p>(+5 {littleCookieImg}) par seconde)</p>
+                                </div>
+                                :
+                                <div>
+                                    <p>Recrutez plus de grand-mères pour avoir plus de travailleurs</p>   
+                                </div>
+                            }
+
+                            {this.state.cooks >= 10 &&
+                                <div className="mt-3">
+                                    <button className="btn btn-dark" disabled={this.state.counter < this.state.mothersCooksPrice} onClick={this.recruitMothersCook}>Recruter une grand mère cuisinière ({this.state.mothersCooksPrice} <img src="./img/cookie2.png" className="littleCookieImg"/>)</button>
+                                    <p>(+10 <img src="./img/cookie2.png" className="littleCookieImg"/>) par seconde)</p>
+                                </div>
+                            }
+
+                            {this.state.mothersCooks >= 10 &&
+                                <div className="mt-3">
+                                    <button className="btn btn-dark" disabled={this.state.counter < this.state.chiefsMothersPrice} onClick={this.recruitChiefMothers}>Recruter une grand mère cheffe cuisinière ({this.state.chiefsMothersPrice} <img src="./img/cookie2.png" className="littleCookieImg"/>)</button>
+                                    <p>(+20 <img src="./img/cookie2.png" className="littleCookieImg"/>) par seconde)</p>
+                                </div>
+                            }
+                    </div>   
+
+                    <div className="col-4 text-center rounded">
                         
                         <h1 className="mb-5">Cookie clicker</h1>
 
@@ -449,10 +485,36 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
                         <img className="Cookie" onClick={this.incrementCounter} src={"./img/cookie2.png"}/>
                             {this.state.message && <div className="alert">{this.state.message}</div>}
                         <br/>
+                        
+                        <div className="container-fluid">
+                            <div className="col-12 padding10 text-center colorNougat rounded">
+                                <h3>Diminuer l'intervalle de temps !</h3>
+                                <h5>Il va vous falloir de gros cookies...</h5>
+                                {this.state.bigCookies === 10 && this.state.newInterval === 1000 ? 
+                                    <div>
+                                        <button className="btn btn-dark" onClick={() => this.lowerInterval()}>Diminuer</button>
+                                        <p>Actuellement : {this.state.newInterval / 1000} seconde</p>    
+                                    </div>
 
+                                    :
+
+                                    <div>
+                                        <p>Actuellement : {this.state.newInterval / 1000} seconde</p>   
+                                    </div>
+                                }
+
+                                {this.state.bigCookies === 100 && this.state.newInterval === 1000 && 
+                                    <div>
+                                        <button className="btn btn-dark" onClick={() => this.lowerInterval()}>Diminuer</button> 
+                                    </div>
+                                }
+                            </div>    
+                        </div>
+                        
                     </div>
-
-                    <div className="col-3 colorNougat rounded">
+                      
+                
+                    <div className="col-2 colorNougat rounded">
                         <div className="m-2 padding10">
                             <h4>Vos clickers :</h4>
                             <div className="paddingLeftNull list-group">
@@ -485,44 +547,29 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
                             </div>
                         </div>
                     </div>
+                    <div className="col-2 border text-center colorNougat padding10 rounded">
+                        <h3>Améliorations :</h3>
+
+                        {this.state.mothers >= 2 ?
+                            <div className="padding10">
+                                <h5>Augmenter le revenu global de 100% !!</h5>
+                                <h6>Attendez au maximum avant de cliquer pour maximiser votre boost !!</h6>
+                                {this.state.successes.map((success, index) => success.complete === true &&
+                                    <div key={index}>
+                                        Succès : {success.name} <GlobalIncomeRiseButton key={index} disabled={success.isClicked === true} click={() => this.updateCookieCounterBySuccessSetClicked(index)}/>  
+                                    </div>
+                                )}
+                            </div>
+                            :
+                            <h4 className="mt-5">Cliquez sur le {littleCookieImg}</h4>
+                        }
+                    </div> 
                 </div>
             </div>
 
             <div className="container">
                 <div className="row padding10">
-                    <div className="col-4 text-center mt-3 colorNougat padding10 rounded">
-                        <h3>Travailleurs :</h3>
-                            <div className="mt-3">
-                                <button className="btn btn-dark" disabled={this.state.counter < this.state.mothersPrice} onClick={this.recruitMother}>Recruter une grand mère ({this.state.mothersPrice} <img src="./img/cookie2.png" className="littleCookieImg"/>)</button>
-                                <p>(+1 {littleCookieImg} par seconde)</p>
-                            </div>
-
-                            {this.state.mothers >= 10 ?
-                                <div className="mt-3">
-                                    <button className="btn btn-dark" disabled={this.state.counter < this.state.cooksPrice} onClick={this.recruitCook}>Recruter un cuisinier ({this.state.cooksPrice} <img src="./img/cookie2.png" className="littleCookieImg"/>)</button>
-                                    <p>(+5 {littleCookieImg}) par seconde)</p>
-                                </div>
-                                :
-                                <div>
-                                    <p>Recrutez plus de grand-mères !! </p>   
-                                </div>
-                            }
-
-                            {this.state.cooks >= 10 &&
-                                <div className="mt-3">
-                                    <button className="btn btn-dark" disabled={this.state.counter < this.state.mothersCooksPrice} onClick={this.recruitMothersCook}>Recruter une grand mère cuisinière ({this.state.mothersCooksPrice} <img src="./img/cookie2.png" className="littleCookieImg"/>)</button>
-                                    <p>(+10 <img src="./img/cookie2.png" className="littleCookieImg"/>) par seconde)</p>
-                                </div>
-                            }
-
-                            {this.state.mothersCooks >= 10 &&
-                                <div className="mt-3">
-                                    <button className="btn btn-dark" disabled={this.state.counter < this.state.chiefsMothersPrice} onClick={this.recruitChiefMothers}>Recruter une grand mère cheffe cuisinière ({this.state.chiefsMothersPrice} <img src="./img/cookie2.png" className="littleCookieImg"/>)</button>
-                                    <p>(+20 <img src="./img/cookie2.png" className="littleCookieImg"/>) par seconde)</p>
-                                </div>
-                            }
-                    </div>   
-
+                    <div className="col-4"></div>
                     <div className="col-4 rounded">
                         {// A factoriser
                             this.state.successes.map((success, index) => success.clicks === this.state.clicks &&
@@ -594,9 +641,6 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
                                 </div> 
                             </div>
                         )}
-
-                        
-
                         {this.state.successes.map((success, index) => success.gargantueskCookies === this.state.gargantueskCookies &&
                             <div key={index} className="container">
                                 <div className="col-12 text-center">
@@ -607,54 +651,7 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
                             </div>
                         )}
                     </div>
-
-                    <div className="col-4 text-center mt-3 colorNougat padding10 rounded">
-                        <h3>Améliorations :</h3>
-
-                        {this.state.mothers >= 2 ?
-                            <div className="padding10">
-                                <h5>Augmenter le revenu global de 100% !!</h5>
-                                <h6>Attendez au maximum avant de cliquer pour maximiser votre boost !!</h6>
-                                {this.state.successes.map((success, index) => success.complete === true &&
-                                    <div key={index}>
-                                        Succès : {success.name} <GlobalIncomeRiseButton key={index} disabled={success.isClicked === true} click={() => this.updateCookieCounterBySuccessSetClicked(index)}/>  
-                                    </div>
-                                )}
-                            </div>
-                            :
-                            <h4 className="mt-5">Cliquez sur le {littleCookieImg}</h4>
-                        }
-                    </div>   
                 </div>  
-            </div>
-
-            <div className="container mt-2">
-                <div className="row  padding10">
-                    <div className="col-4"></div>
-
-                    <div className="col-4 padding10 text-center colorNougat rounded">
-                        <h3>Diminuer l'intervalle de temps !</h3>
-                        <h5>Il va vous falloir de gros cookies...</h5>
-                        {this.state.bigCookies === 10 && this.state.newInterval === 1000 ? 
-                            <div>
-                                <button className="btn btn-dark" onClick={() => this.lowerInterval()}>Diminuer</button>
-                                <p>Actuellement : {this.state.newInterval / 1000} seconde</p>    
-                            </div>
-
-                            :
-
-                            <div>
-                                <p>Actuellement : {this.state.newInterval / 1000} seconde</p>   
-                            </div>
-                        }
-
-                        {this.state.bigCookies === 100 && this.state.newInterval === 1000 && 
-                            <div>
-                                <button className="btn btn-dark" onClick={() => this.lowerInterval()}>Diminuer</button> 
-                            </div>
-                        }
-                    </div>
-                </div>
             </div>
         </div>
         )
@@ -731,9 +728,8 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
      *  Met à jour l'intervale en la diminuant de 10 ms
      */
     lowerInterval() {
-        this.interval = setInterval(this.updateCookiesCounter, this.state.interval - 5);
         this.setState({
-            newInterval: this.state.interval - this.interval
+            interval: this.state.interval - 10
         })
     }
     
