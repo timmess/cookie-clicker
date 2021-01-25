@@ -60,7 +60,7 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
         super();
         this.state = {
             counter: 0,
-            bigCookies: 10,
+            bigCookies: 0,
             demesuredCookies: 0,
             gargantueskCookies: 0,
             cookiesPerSecond: 0,
@@ -572,80 +572,96 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
                     <div className="col-4"></div>
                     <div className="col-4 rounded">
                         {// A factoriser
-                            this.state.successes.map((success, index) => success.clicks === this.state.clicks &&
-                            <div key={index} className="container">
+                            this.state.successes.map((success, index) => this.state.clicks >= success.clicks  &&
+                            <div key={index} className="container" role="alert">
                                 <div className="col-12 text-center">
-                                    <div className="alert alert-success mb-0 mt-5">
+                                    <div className="alert alert-success alert-dismissible fade show">
                                         {success.message}
+                                        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                        </button>  
                                     </div>
                                 </div> 
                             </div>
                         )}  
                         
-                        {this.state.successes.map((success, index) => success.mothers === this.state.mothers &&
+                        {this.state.successes.map((success, index) => this.state.mothers >= success.mothers  &&
                             <div key={index} className="container">
                                 <div className="col-12 text-center">
-                                    <div className="alert alert-success mb-0">
+                                    <div className="alert alert-success alert-dismissible fade show">
                                         {success.message}
+                                        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                        </button>  
                                     </div>
                                 </div> 
                             </div>
                         )}     
                         
-                        {this.state.successes.map((success, index) => success.cooks === this.state.cooks &&
+                        {this.state.successes.map((success, index) => this.state.cooks >= success.cooks &&
                             <div key={index} className="container">
                                 <div className="col-12 text-center">
-                                    <div className="alert alert-success mb-0">
+                                    <div className="alert alert-success alert-dismissible fade show">
                                         {success.message}
+                                        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                        </button>  
                                     </div>
                                 </div> 
                             </div>
                         )}    
                         
-                        {this.state.successes.map((success, index) => success.mothersCooks === this.state.mothersCooks &&
+                        {this.state.successes.map((success, index) => this.state.mothersCooks >= success.mothersCooks &&
                             <div key={index} className="container">
                                 <div className="col-12 text-center">
-                                    <div className="alert alert-success mb-0">
+                                    <div className="alert alert-success alert-dismissible fade show">
                                         {success.message}
+                                        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                        </button>  
                                     </div>
                                 </div> 
                             </div>
                         )}   
                         
-                        {this.state.successes.map((success, index) => success.chiefsMothers === this.state.chiefsMothers &&
+                        {this.state.successes.map((success, index) => this.state.chiefsMothers >= success.chiefsMothers &&
                             <div key={index} className="container">
                                 <div className="col-12 text-center">
-                                    <div className="alert alert-success mb-0">
+                                    <div className="alert alert-success alert-dismissible fade show">
                                         {success.message}
+                                        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                        </button>  
                                     </div>
                                 </div> 
                             </div>
                         )}
 
-                        {this.state.successes.map((success, index) => success.bigCookies === this.state.bigCookies &&
+                        {this.state.successes.map((success, index) => this.state.bigCookies >= success.bigCookies  &&
                             <div key={index} className="container">
                                 <div className="col-12 text-center">
-                                    <div className="alert alert-success mb-0">
+                                    <div className="alert alert-success alert-dismissible fade show">
                                         {success.message}
+                                        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                        </button>  
                                     </div>
                                 </div> 
                             </div>
                         )}
 
-                        {this.state.successes.map((success, index) => success.demesuredCookies === this.state.demesuredCookies &&
+                        {this.state.successes.map((success, index) => this.state.demesuredCookies >= success.demesuredCookies &&
                             <div key={index} className="container">
                                 <div className="col-12 text-center">
-                                    <div className="alert alert-success mb-0">
+                                    <div className="alert alert-success alert-dismissible fade show">
                                         {success.message}
+                                        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                        </button>  
                                     </div>
                                 </div> 
                             </div>
                         )}
-                        {this.state.successes.map((success, index) => success.gargantueskCookies === this.state.gargantueskCookies &&
+                        {this.state.successes.map((success, index) => this.state.gargantueskCookies >= success.gargantueskCookies &&
                             <div key={index} className="container">
                                 <div className="col-12 text-center">
-                                    <div className="alert alert-success mb-0">
+                                    <div className="alert alert-success alert-dismissible fade show">
                                         {success.message}
+                                        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                        </button>  
                                     </div>
                                 </div> 
                             </div>
