@@ -60,6 +60,8 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
         super();
         this.state = {
             counter: 0,
+            incrementClickCounter: 1,
+            incrementClickPrice: 1000,
             bigCookies: 0,
             demesuredCookies: 0,
             gargantueskCookies: 0,
@@ -90,7 +92,7 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
             chiefsMothers: 0,
             chiefsMothersPrice: 5000,
             interval: 1000,
-            newInterval: 1000,
+            newInterval: 0,
             message: "",
             successes:
                     [
@@ -405,6 +407,7 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
         this.setClicked = this.setClicked.bind(this);
         this.recruitMothersCook = this.recruitMothersCook.bind(this);
         this.recruitChiefMothers = this.recruitChiefMothers.bind(this);
+        this.incrementClick = this.incrementClick.bind(this);
         
         this.interval = setInterval(this.updateCookiesCounter, this.state.interval);
 
@@ -487,28 +490,40 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
                         <br/>
                         
                         <div className="container-fluid">
-                            <div className="col-12 padding10 text-center colorNougat rounded">
-                                <h3>Diminuer l'intervalle de temps !</h3>
-                                <h5>Il va vous falloir de gros cookies...</h5>
-                                {this.state.bigCookies === 10 && this.state.newInterval === 1000 ? 
-                                    <div>
-                                        <button className="btn btn-dark" onClick={() => this.lowerInterval()}>Diminuer</button>
-                                        <p>Actuellement : {this.state.newInterval / 1000} seconde</p>    
-                                    </div>
+                            <div className="row">
+                                <div className="col-2"></div>
+                                <div className="col-8 padding10 text-center colorNougat rounded">
+                                    <h3>Diminuer l'intervalle de temps !</h3>
+                                    <h5>Il va vous falloir de gros cookies...</h5>
+                                    {this.state.bigCookies === 10 && this.state.newInterval === 1000 ? 
+                                        <div>
+                                            <button className="btn btn-dark" onClick={() => this.lowerInterval()}>Diminuer</button>
+                                            <p>Actuellement : {this.state.newInterval / 1000} seconde</p>    
+                                        </div>
 
-                                    :
+                                        :
 
-                                    <div>
-                                        <p>Actuellement : {this.state.newInterval / 1000} seconde</p>   
-                                    </div>
-                                }
+                                        <div>
+                                            <p>Actuellement : {this.state.newInterval / 1000} seconde</p>   
+                                        </div>
+                                    }
 
-                                {this.state.bigCookies === 100 && this.state.newInterval === 1000 && 
-                                    <div>
-                                        <button className="btn btn-dark" onClick={() => this.lowerInterval()}>Diminuer</button> 
-                                    </div>
-                                }
-                            </div>    
+                                    {this.state.bigCookies === 100 && this.state.newInterval === 1000 && 
+                                        <div>
+                                            <button className="btn btn-dark" onClick={() => this.lowerInterval()}>Diminuer</button> 
+                                        </div>
+                                    }
+                                </div> 
+                            </div>   
+                            <div class="row">
+                                <h3>Augmenter le nombre de cookie généré par click !!</h3>
+                                <div className="col-2"></div>
+                                <div className="col-8 padding10 text-center colorNougat">
+                                    <button className="btn btn-success" onClick={this.incrementClick} disabled={this.state.counter < this.state.incrementClickPrice}>Augmenter les cookies générés ({this.state.incrementClickPrice} {littleCookieImg})</button> 
+                                    <br/> 
+                                    Actuellement : {this.state.incrementClickCounter} cookie / click  
+                                </div>
+                            </div>
                         </div>
                         
                     </div>
@@ -748,6 +763,7 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
             interval: this.state.interval - 10
         })
     }
+
     
     /**
      * Mettre à jour le nombre cookies en lui ajoutant le cookiesPerSecond
@@ -794,7 +810,7 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
     /**
      * Augmenter le débit des cookies de 1, mets à jour le prix des grandmas, le nombre de grandmas et déduis le prix dr la grandma au counter
      */
-     recruitMothersCook() {
+    recruitMothersCook() {
         this.setState({
             counter: this.state.counter - this.state.mothersCooksPrice,
             cookiesPerSecond: this.state.cookiesPerSecond + 10,
@@ -806,7 +822,7 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
     /**
      * Augmenter le débit des cookies de 1, mets à jour le prix des grandmas, le nombre de grandmas et déduis le prix dr la grandma au counter
      */
-     recruitChiefMothers() {
+    recruitChiefMothers() {
         this.setState({
             counter: this.state.counter - this.state.chiefsMothersPrice,
             cookiesPerSecond: this.state.cookiesPerSecond + 20,
@@ -816,11 +832,22 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
     }
 
     /**
+     * Augmente le nombre de cookie généré au click
+     */
+    incrementClick() {
+        this.setState({
+            counter: this.state.counter - this.state.incrementClickPrice,
+            incrementClickCounter: this.state.incrementClickCounter + 1,
+            incrementClickPrice: this.state.incrementClickPrice + 7000,
+        });
+    }
+
+    /**
      * Augmenter de 1 la valeur du state de counter et génère des augmentations aléatoires
      */
     incrementCounter() {
         this.setState({
-            counter: this.state.counter + 1,
+            counter: this.state.counter + this.state.incrementClickCounter,
             clicks: this.state.clicks +1,
         })
 
