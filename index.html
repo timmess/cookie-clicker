@@ -491,35 +491,19 @@ let middleCookieImg =<img src="./img/cookie2.png" className="clickersCookieImg"/
                         
                         <div className="container-fluid">
                             <div className="row">
-                                <div className="col-2"></div>
-                                <div className="col-8 padding10 text-center colorNougat rounded">
+                                <div className="col-1"></div>
+                                <div className="col-10 padding10 text-center colorNougat rounded">
                                     <h3>Diminuer l'intervalle de temps !</h3>
                                     <h5>Il va vous falloir de gros cookies...</h5>
-                                    {this.state.bigCookies === 10 && this.state.newInterval === 1000 ? 
-                                        <div>
-                                            <button className="btn btn-dark" onClick={() => this.lowerInterval()}>Diminuer</button>
-                                            <p>Actuellement : {this.state.newInterval / 1000} seconde</p>    
-                                        </div>
-
-                                        :
-
-                                        <div>
-                                            <p>Actuellement : {this.state.newInterval / 1000} seconde</p>   
-                                        </div>
-                                    }
-
-                                    {this.state.bigCookies === 100 && this.state.newInterval === 1000 && 
-                                        <div>
-                                            <button className="btn btn-dark" onClick={() => this.lowerInterval()}>Diminuer</button> 
-                                        </div>
-                                    }
+                                    <button className="btn btn-dark" disabled={this.state.bigCookies < 10} onClick={() => this.lowerInterval()}>Diminuer</button>
+                                    <p>Actuellement : {this.state.newInterval / 1000} seconde</p> 
                                 </div> 
                             </div>   
                             <div class="row">
-                                <h3>Augmenter le nombre de cookie généré par click !!</h3>
-                                <div className="col-2"></div>
-                                <div className="col-8 padding10 text-center colorNougat">
-                                    <button className="btn btn-success" onClick={this.incrementClick} disabled={this.state.counter < this.state.incrementClickPrice}>Augmenter les cookies générés ({this.state.incrementClickPrice} {littleCookieImg})</button> 
+                                <div className="col-1"></div>
+                                <div className="col-10 padding10 text-center colorNougat">
+                                    <h3>Augmenter les cookies générés !</h3>
+                                    <button className="btn btn-dark" onClick={this.incrementClick} disabled={this.state.counter < this.state.incrementClickPrice}>Augmenter les cookies générés ({this.state.incrementClickPrice} {littleCookieImg})</button> 
                                     <br/> 
                                     Actuellement : {this.state.incrementClickCounter} cookie / click  
                                 </div>
